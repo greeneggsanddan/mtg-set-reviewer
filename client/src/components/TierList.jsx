@@ -10,7 +10,7 @@ export default function TierList({ cardData, setCardData }) {
   }
 
   return (
-    <div className="container d-flex flex-column gap-2">
+    <div className="d-flex flex-column gap-2">
       <div className="card">
         <div className="card-header">S</div>
         <ul className="list-group list-group-flush">{displayTier('S')}</ul>

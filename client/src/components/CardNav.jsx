@@ -11,7 +11,7 @@ export default function CardNav({ currentCard, setCurrentCard, cardData, setCard
 
   return (
     <div
-      className="btn-group container"
+      className="btn-group"
       role="group"
       aria-label="Card navigation"
     >

@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 export default function Toolbar({
   cardData,
   setCardData,
+  rank,
+  setRank,
   currentCard
 }) {
-  const [rank, setRank] = useState(cardData[currentCard].rank);
 
   // Updates the card properties when currentCard changes
   useEffect(() => {
@@ -25,7 +26,7 @@ export default function Toolbar({
 
   return (
     <>
-      <div className="btn-group container" role="group" aria-label="Rank radio">
+      <div className="btn-group" role="group" aria-label="Rank radio">
         <input
           type="radio"
           className="btn-check"
@@ -118,7 +119,7 @@ export default function Toolbar({
           SB
         </label>
       </div>
-      <div>Temp</div>
+      <div>Other properties</div>
     </>
   );
 }
