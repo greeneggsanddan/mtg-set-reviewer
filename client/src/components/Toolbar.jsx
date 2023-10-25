@@ -110,9 +110,9 @@ export default function Toolbar({
           className="btn-check"
           name="sb-rank-radio"
           id="sb-rank-radio"
-          value="SB"
+          value="Sideboard"
           autoComplete="off"
-          checked={rank === "SB"}
+          checked={rank === "Sideboard"}
           onChange={handleRadioChange}
         />
         <label className="btn btn-outline-primary" htmlFor="sb-rank-radio">

@@ -52,7 +52,7 @@ export default function TierList({ cardData, setCardData }) {
       </div>
       <div className="rated card">
         <div className="card-header">Sideboard</div>
-        <ul className="list-group list-group-flush">{displayTier("SB")}</ul>
+        <ul className="list-group list-group-flush">{displayTier("Sideboard")}</ul>
       </div>
       <div className="rated card">
         <div className="card-header">Unranked</div>

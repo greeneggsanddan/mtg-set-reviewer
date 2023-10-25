@@ -9,7 +9,7 @@ function Droppable(props) {
 }
 
 export default function DroppableZone() {
-  const ranks = ["S", "A", "B", "C", "D", "F", "SB"];
+  const ranks = ["S", "A", "B", "C", "D", "F", "Sideboard"];
 
   return (
     <div className="container position-absolute top-0 h-100" style={{ pointerEvents: 'none' }}>
