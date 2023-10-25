@@ -20,5 +20,7 @@ module.exports = {
     ],
     "react/prop-types": "off",
     "jsx-a11y/label-has-associated-control": "off",
+    "react/jsx-no-bind": "off",
+    "import/no-extraneous-dependencies": "off"
   },
 };

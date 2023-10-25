@@ -4,7 +4,7 @@ import Toolbar from "./Toolbar";
 import DroppableZone from "./DroppableZone";
 import DraggableCard from "./DraggableCard";
 
-export default function CardStack({ cardData, setCardData, currentCard }) {
+export default function CardStack({ cardData, setCardData, currentCard, setCurrentCard }) {
   const [rank, setRank] = useState(cardData[currentCard].rank);
 
   const card = cardData[currentCard];
@@ -12,11 +12,14 @@ export default function CardStack({ cardData, setCardData, currentCard }) {
   function handleDragEnd() {
     const updatedCards = cardData.map((c, index) => {
       if (index === currentCard) {
+        // eslint-disable-next-line object-shorthand
         return { ...c, rank: rank };
       }
       return c;
     });
     setCardData(updatedCards);
+    if (currentCard === cardData.length - 1) setCurrentCard(0)
+    else setCurrentCard(currentCard + 1)
   }
 
   function handleDragOver(e) {
@@ -33,14 +36,14 @@ export default function CardStack({ cardData, setCardData, currentCard }) {
         >
           <DraggableCard>
             <img
-              src={card.image_uris.large}
+              src={card.image_uris.png}
               alt={card.name}
               className="img-fluid w-100"
             />
           </DraggableCard>
           <DragOverlay>
             <img
-              src={card.image_uris.large}
+              src={card.image_uris.png}
               alt={card.name}
               className="img-fluid w-100"
             />

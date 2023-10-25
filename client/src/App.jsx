@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import SetSelector from "./components/SetSelector";
 import TabToggle from "./components/TabToggle";
 import TierList from "./components/TierList";
+import TierListLarge from "./components/TierListLarge";
 import Ranker from "./components/Ranker";
 import "./App.css";
 
 export default function App() {
   const [isTierList, setIsTierList] = useState(true);
+  const [currentCard, setCurrentCard] = useState(0);
+  
 
   const [cardData, setCardData] = useState([]);
   useEffect(() => {
@@ -46,14 +49,26 @@ export default function App() {
   }, []);
 
   return (
-    <div className="container d-flex flex-column gap-2">
-      <SetSelector />
-      <TabToggle isTierList={isTierList} setIsTierList={setIsTierList} />
-      {isTierList ? (
-        <TierList cardData={cardData} setCardData={setCardData} />
-      ) : (
-        <Ranker cardData={cardData} setCardData={setCardData} />
-      )}
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-10 d-none d-lg-block">
+          <TierListLarge cardData={cardData} setCardData={setCardData} />
+        </div>
+        <div className="col-2 d-flex flex-column gap-2">
+          <SetSelector />
+          <TabToggle isTierList={isTierList} setIsTierList={setIsTierList} />
+          {isTierList ? (
+            <TierList cardData={cardData} setCardData={setCardData} />
+          ) : (
+            <Ranker
+              cardData={cardData}
+              setCardData={setCardData}
+              currentCard={currentCard}
+              setCurrentCard={setCurrentCard}
+            />
+          )}
+        </div>
+      </div>
     </div>
   );
 }

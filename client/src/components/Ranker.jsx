@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import CardStack from "./CardStack";
 import CardNav from "./CardNav";
 
-export default function Ranker({ cardData, setCardData }) {
-  const [currentCard, setCurrentCard] = useState(0);
+export default function Ranker({ cardData, setCardData, currentCard, setCurrentCard }) {
   
   return (
     <>
