@@ -4,15 +4,14 @@ import "./TierListLarge.css";
 export default function TierListLarge({ cardData, setCardData }) {
   const ranks = ["S", "A", "B", "C", "D", "F", "Sideboard", "Unranked"];
   const colors = ["W", "U", "B", "R", "G", "MC", "C"];
-  const rankColors = {
-    S: "bg-info-subtle",
-    A: "bg-primary-subtle",
-    B: "bg-success-subtle",
-    C: "bg-warning-subtle",
-    D: "bg-danger-subtle",
-    F: "bg-dark-subtle",
-    Sideboard: "bg-body-secondary",
-    Unranked: "bg-body-tertiary",
+  const bgColors = {
+    W: "bg-warning-subtle",
+    U: "bg-primary-subtle",
+    B: "bg-dark-subtle",
+    R: "bg-danger-subtle",
+    G: "bg-success-subtle",
+    MC: "bg-warning",
+    C: "bg-body-secondary"
   };
   const colorString = {
     W: "White",
@@ -50,7 +49,7 @@ export default function TierListLarge({ cardData, setCardData }) {
     return (
       cards.length > 0 && (
         <>
-          <div className={`card-header text-center ${rankColors[rank]}`}>
+          <div className="card-header text-center">
             {rank}
           </div>
           <ul className="list-group list-group-flush">
@@ -74,7 +73,7 @@ export default function TierListLarge({ cardData, setCardData }) {
       {colors.map((color) => (
         <div className="col" key={color}>
           <div className="card">
-            <div className="card-header text-center">{colorString[color]}</div>
+            <div className={`card-header text-center ${bgColors[color]}`}>{colorString[color]}</div>
             {ranks.map((rank) => displayCards(color, rank))}
           </div>
         </div>

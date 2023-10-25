@@ -33,7 +33,12 @@ export default function App() {
 
         // Adds the 'rank' property to each card and assigns it a value of null
         const rankedCards = cards.map((card) => ({
-          ...card,
+          name: card.name,
+          id: card.id,
+          image: card.image_uris.png,
+          mana_cost: card.mana_cost,
+          cmc: card.cmc,
+          colors: card.colors,
           rank: null,
         }));
 

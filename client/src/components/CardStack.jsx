@@ -36,14 +36,14 @@ export default function CardStack({ cardData, setCardData, currentCard, setCurre
         >
           <DraggableCard>
             <img
-              src={card.image_uris.png}
+              src={card.image}
               alt={card.name}
               className="img-fluid w-100"
             />
           </DraggableCard>
           <DragOverlay>
             <img
-              src={card.image_uris.png}
+              src={card.image}
               alt={card.name}
               className="img-fluid w-100"
             />
