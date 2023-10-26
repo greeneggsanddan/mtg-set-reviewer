@@ -54,26 +54,33 @@ export default function App() {
   }, []);
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-10 d-none d-lg-block">
-          <TierListLarge cardData={cardData} setCardData={setCardData} />
+    <>
+      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <div className="container-fluid">
+          <a className="navbar-brand h1 mb-0" href="#">MTG Set Reviewer</a>
         </div>
-        <div className="col-2 d-flex flex-column gap-2">
-          <SetSelector />
-          <TabToggle isTierList={isTierList} setIsTierList={setIsTierList} />
-          {isTierList ? (
-            <TierList cardData={cardData} setCardData={setCardData} />
-          ) : (
-            <Ranker
-              cardData={cardData}
-              setCardData={setCardData}
-              currentCard={currentCard}
-              setCurrentCard={setCurrentCard}
-            />
-          )}
+      </nav>
+      <div className="container">
+        <div className="row">
+          <div className="col d-none d-md-block">
+            <TierListLarge cardData={cardData} setCardData={setCardData} />
+          </div>
+          <div className="col-3 d-flex flex-column gap-3" style={{ width: '400px' }}>
+            <SetSelector />
+            <TabToggle isTierList={isTierList} setIsTierList={setIsTierList} />
+            {isTierList ? (
+              <TierList cardData={cardData} setCardData={setCardData} />
+            ) : (
+              <Ranker
+                cardData={cardData}
+                setCardData={setCardData}
+                currentCard={currentCard}
+                setCurrentCard={setCurrentCard}
+              />
+            )}
+          </div>
         </div>
-      </div>
-    </div>
+        </div>
+      </>
   );
 }

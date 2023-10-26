@@ -25,29 +25,31 @@ export default function TierListLarge({ cardData, setCardData }) {
 
   function trimName(str) {
     const index = str.indexOf("/");
-
     return index === -1 ? str : str.slice(0, index - 1);
   }
 
   // Displays cards of a specified color and rank
   function displayCards(color, rank) {
-    let cards =
+    let cards;
+    const data =
       rank === "Unranked"
         ? cardData.filter((card) => card.rank === null)
         : cardData.filter((card) => card.rank === rank);
 
     if (color === "MC") {
-      cards = cards.filter((card) => card.colors.length > 1);
+      cards = data.filter((card) => card.colors.length > 1);
     } else if (color === "C") {
-      cards = cards.filter((card) => card.colors.length === 0);
+      cards = data.filter((card) => card.colors.length === 0);
     } else {
-      cards = cards.filter(
+      cards = data.filter(
         (card) => card.colors.length === 1 && card.colors[0] === color,
       );
     }
 
+    const sorted = rank === 'Unranked' ? cards: cards.sort((a, b) => a.cmc - b.cmc);
+
     return (
-      cards.length > 0 && (
+      sorted.length > 0 && (
         <>
           <div className="card-header text-center">
             {rank}
@@ -69,7 +71,7 @@ export default function TierListLarge({ cardData, setCardData }) {
   }
 
   return (
-    <div className="row row-cols-5 g-4">
+    <div className="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-3">
       {colors.map((color) => (
         <div className="col" key={color}>
           <div className="card">
