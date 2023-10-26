@@ -71,7 +71,7 @@ export default function TierListLarge({ cardData, setCardData }) {
   }
 
   return (
-    <div className="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-3">
+    <div className="row row-cols-1 row-cols-md-1 row-cols-lg-3 row-cols-xl-5 g-3">
       {colors.map((color) => (
         <div className="col" key={color}>
           <div className="card">
