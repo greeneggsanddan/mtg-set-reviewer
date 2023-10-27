@@ -7,7 +7,7 @@ export default function Ranker({ cardData, setCardData, currentCard, setCurrentC
   const [rank, setRank] = useState(cardData[currentCard].rank);
   
   return (
-    <div className="sticky-top" style={{ top: "1.5rem" }}>
+    <div className="sticky-top d-flex flex-column" style={{ top: "1rem" }}>
       <CardStack
         cardData={cardData}
         setCardData={setCardData}

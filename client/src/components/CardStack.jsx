@@ -30,7 +30,7 @@ export default function CardStack({
   }
 
   return (
-    <div className="position-relative">
+    <div className="position-relative mb-3">
       <DndContext
         collisionDetection={pointerWithin}
         onDragEnd={handleDragEnd}

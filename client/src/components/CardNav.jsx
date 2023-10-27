@@ -10,55 +10,22 @@ export default function CardNav({ currentCard, setCurrentCard, cardData, setCard
   }
 
   return (
-    <div className="btn-group" role="group" aria-label="Card navigation">
+    <div className="btn-group d-flex" role="group" aria-label="Card navigation">
       <button
         type="button"
-        className="btn btn-primary active"
+        className="btn btn-outline-primary"
         onClick={decrementCard}
       >
-        <i class="bi bi-chevron-left"></i>
+        <i className="bi bi-chevron-left"></i>
+        <span> Prev</span>
       </button>
-      <div
-        className="btn-group"
-        role="group"
-        aria-label="Card properties toggle button group"
-      >
-        <input
-          type="checkbox"
-          className="btn-check"
-          id="btncheck1"
-          autoComplete="off"
-        />
-        <label className="btn btn-outline-primary" htmlFor="btncheck1">
-          Checkbox 1
-        </label>
-
-        <input
-          type="checkbox"
-          className="btn-check"
-          id="btncheck2"
-          autoComplete="off"
-        />
-        <label className="btn btn-outline-primary" htmlFor="btncheck2">
-          Checkbox 2
-        </label>
-
-        <input
-          type="checkbox"
-          className="btn-check"
-          id="btncheck3"
-          autoComplete="off"
-        />
-        <label className="btn btn-outline-primary" htmlFor="btncheck3">
-          Checkbox 3
-        </label>
-      </div>
       <button
         type="button"
-        className="btn btn-primary active"
+        className="btn btn-outline-primary"
         onClick={incrementCard}
       >
-        <i class="bi bi-chevron-right"></i>
+        <span>Next </span>
+        <i className="bi bi-chevron-right"></i>
       </button>
     </div>
   );

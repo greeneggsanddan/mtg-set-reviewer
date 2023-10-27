@@ -67,11 +67,7 @@ export default function App() {
             <TierListLarge cardData={cardData} setCardData={setCardData} />
           </div>
           <div
-            className="col"
-            style={{
-              flex: "0 0 auto",
-              maxWidth: "384px",
-            }}
+            className="col col-lg-3 col-xl-2"
           >
             <TabToggle isTierList={isTierList} setIsTierList={setIsTierList} />
             {isTierList ? (

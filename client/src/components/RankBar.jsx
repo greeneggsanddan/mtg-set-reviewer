@@ -30,7 +30,7 @@ export default function RankBar({
 
   return (
     <div
-      className="btn-group d-flex"
+      className="btn-group d-flex mb-3"
       role="group"
       aria-label="Rank button group"
     >
