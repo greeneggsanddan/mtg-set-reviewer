@@ -63,23 +63,19 @@ export default function App() {
       </nav>
       <div className="container py-4">
         <div className="row">
-          <div className="col d-none d-md-block">
+            <TabToggle isTierList={isTierList} setIsTierList={setIsTierList} />
+        </div>
+        <div className="row">
+          <div className={`col ${isTierList ? 'd-block' : 'd-none d-md-block'}`}>
             <TierListLarge cardData={cardData} setCardData={setCardData} />
           </div>
-          <div
-            className="col col-lg-3 col-xl-2"
-          >
-            <TabToggle isTierList={isTierList} setIsTierList={setIsTierList} />
-            {isTierList ? (
-              <TierList cardData={cardData} setCardData={setCardData} />
-            ) : (
-              <Ranker
-                cardData={cardData}
-                setCardData={setCardData}
-                currentCard={currentCard}
-                setCurrentCard={setCurrentCard}
-              />
-            )}
+          <div className={`col col-lg-3 col-xl-2 ${isTierList ? 'd-none d-md-block' : 'd-block'}`}>
+            <Ranker
+              cardData={cardData}
+              setCardData={setCardData}
+              currentCard={currentCard}
+              setCurrentCard={setCurrentCard}
+            />
           </div>
         </div>
       </div>
