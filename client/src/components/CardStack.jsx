@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { DndContext, DragOverlay, pointerWithin } from "@dnd-kit/core";
 import Toolbar from "./Toolbar";
+import RankBar from "./RankBar";
 import DroppableZone from "./DroppableZone";
 import DraggableCard from "./DraggableCard";
 
@@ -38,25 +39,26 @@ export default function CardStack({ cardData, setCardData, currentCard, setCurre
             <img
               src={card.image}
               alt={card.name}
-              className="img-fluid w-100"
+              className="w-100"
             />
           </DraggableCard>
           <DragOverlay>
             <img
               src={card.image}
               alt={card.name}
-              className="img-fluid w-100"
+              className="w-100"
             />
           </DragOverlay>
           <DroppableZone />
         </DndContext>
       </div>
-      <Toolbar
+      <RankBar
         cardData={cardData}
         setCardData={setCardData}
         rank={rank}
         setRank={setRank}
         currentCard={currentCard}
+        setCurrentCard={setCurrentCard}
       />
     </>
   );

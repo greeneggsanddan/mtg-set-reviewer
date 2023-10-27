@@ -9,7 +9,6 @@ import "./App.css";
 export default function App() {
   const [isTierList, setIsTierList] = useState(true);
   const [currentCard, setCurrentCard] = useState(0);
-  
 
   const [cardData, setCardData] = useState([]);
   useEffect(() => {
@@ -56,17 +55,24 @@ export default function App() {
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
-        <div className="container-fluid">
-          <a className="navbar-brand h1 mb-0" href="#">MTG Set Reviewer</a>
+        <div className="container">
+          <a className="navbar-brand h1 mb-0" href="#">
+            MTG Set Reviewer
+          </a>
         </div>
       </nav>
-      <div className="container">
+      <div className="container py-4">
         <div className="row">
           <div className="col d-none d-md-block">
             <TierListLarge cardData={cardData} setCardData={setCardData} />
           </div>
-          <div className="col-3 d-flex flex-column gap-3" style={{ width: '400px' }}>
-            <SetSelector />
+          <div
+            className="col"
+            style={{
+              flex: "0 0 auto",
+              maxWidth: "384px",
+            }}
+          >
             <TabToggle isTierList={isTierList} setIsTierList={setIsTierList} />
             {isTierList ? (
               <TierList cardData={cardData} setCardData={setCardData} />
@@ -80,7 +86,7 @@ export default function App() {
             )}
           </div>
         </div>
-        </div>
-      </>
+      </div>
+    </>
   );
 }
