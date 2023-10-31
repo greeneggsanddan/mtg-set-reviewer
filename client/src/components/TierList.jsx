@@ -1,6 +1,6 @@
 import ManaCost from "./ManaCost";
 
-export default function TierListLarge({ cardData, setCardData }) {
+export default function TierList({ cardData, setCardData }) {
   const ranks = ["S", "A", "B", "C", "D", "F", "Sideboard", "Unranked"];
   const colors = ["W", "U", "B", "R", "G", "MC", "C"];
   const bgColors = {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import TabToggle from "./components/TabToggle";
-import TierListLarge from "./components/TierListLarge";
+import TierList from "./components/TierList";
 import Ranker from "./components/Ranker";
 import "./App.css";
 
@@ -66,7 +66,7 @@ export default function App() {
           <div
             className={`col ${isTierList ? "d-block" : "d-none d-md-block"}`}
           >
-            <TierListLarge cardData={cardData} setCardData={setCardData} />
+            <TierList cardData={cardData} setCardData={setCardData} />
           </div>
           <div
             className={`col col-lg-3 col-xl-2 ${
