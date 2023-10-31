@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CardStack from "./CardStack";
 import RankBar from "./RankBar";
 import CardNav from "./CardNav";
 
-export default function Ranker({ cardData, setCardData, currentCard, setCurrentCard }) {
-  const [rank, setRank] = useState(cardData[currentCard].rank);
+export default function Ranker({ cardData, setCardData }) {
+  const [currentCard, setCurrentCard] = useState(0);
+  const [rank, setRank] = useState(null);
+
+  useEffect(() => {
+    if (cardData.length > 0) {
+      setRank(cardData[currentCard].rank);
+    }
+  }, [cardData, currentCard]);
   
   return (
     <div className="sticky-top d-flex flex-column" style={{ top: "1rem" }}>

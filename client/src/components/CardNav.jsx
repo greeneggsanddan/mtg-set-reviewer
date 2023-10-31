@@ -1,4 +1,4 @@
-export default function CardNav({ currentCard, setCurrentCard, cardData, setCardData }) {
+export default function CardNav({ currentCard, setCurrentCard, cardData }) {
   function decrementCard() {
     if (currentCard === 0) setCurrentCard(cardData.length - 1);
     else setCurrentCard(currentCard - 1);

@@ -12,7 +12,9 @@ export default function RankBar({
 
   // Updates the card properties when currentCard changes
   useEffect(() => {
-    setRank(cardData[currentCard].rank);
+    if (cardData.length > 0) {
+      setRank(cardData[currentCard].rank);
+    }
   }, [currentCard, cardData]);
 
   function handleButtonClick(e) {

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { DndContext, DragOverlay, pointerWithin } from "@dnd-kit/core";
 import DroppableZone from "./DroppableZone";
 import DraggableCard from "./DraggableCard";
@@ -10,7 +11,13 @@ export default function CardStack({
   rank,
   setRank
 }) {
-  const card = cardData[currentCard];
+  const [card, setCard] = useState({image: null, name: null});
+
+  useEffect(() => {
+    if (cardData.length > 0) {
+      setCard(cardData[currentCard]);
+    }
+  }, [cardData, currentCard]);
 
   function handleDragEnd() {
     const updatedCards = cardData.map((c, index) => {

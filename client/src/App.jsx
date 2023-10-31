@@ -8,9 +8,8 @@ import "./App.css";
 
 export default function App() {
   const [isTierList, setIsTierList] = useState(true);
-  const [currentCard, setCurrentCard] = useState(0);
-
   const [cardData, setCardData] = useState([]);
+
   useEffect(() => {
     let mounted = true;
 
@@ -41,7 +40,7 @@ export default function App() {
           rank: null,
         }));
 
-        setCardData(rankedCards);
+        if (mounted === true) setCardData(rankedCards);
       } catch (error) {
         console.log(error);
       }
@@ -63,18 +62,22 @@ export default function App() {
       </nav>
       <div className="container py-4">
         <div className="row">
-            <TabToggle isTierList={isTierList} setIsTierList={setIsTierList} />
+          <TabToggle isTierList={isTierList} setIsTierList={setIsTierList} />
         </div>
         <div className="row">
-          <div className={`col ${isTierList ? 'd-block' : 'd-none d-md-block'}`}>
+          <div
+            className={`col ${isTierList ? "d-block" : "d-none d-md-block"}`}
+          >
             <TierListLarge cardData={cardData} setCardData={setCardData} />
           </div>
-          <div className={`col col-lg-3 col-xl-2 ${isTierList ? 'd-none d-md-block' : 'd-block'}`}>
+          <div
+            className={`col col-lg-3 col-xl-2 ${
+              isTierList ? "d-none d-md-block" : "d-block"
+            }`}
+          >
             <Ranker
               cardData={cardData}
               setCardData={setCardData}
-              currentCard={currentCard}
-              setCurrentCard={setCurrentCard}
             />
           </div>
         </div>
