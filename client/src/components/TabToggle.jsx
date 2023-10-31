@@ -27,7 +27,7 @@ export default function TabToggle({ isTierList, setIsTierList }) {
         onChange={handleRadioChange}
       />
       <label className="btn btn-outline-primary" htmlFor="ranking-radio">
-        Ranking
+        Ranker
       </label>
     </div>
   );

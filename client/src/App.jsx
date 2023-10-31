@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import SetSelector from "./components/SetSelector";
 import TabToggle from "./components/TabToggle";
-import TierList from "./components/TierList";
 import TierListLarge from "./components/TierListLarge";
 import Ranker from "./components/Ranker";
 import "./App.css";
@@ -60,7 +58,7 @@ export default function App() {
           </a>
         </div>
       </nav>
-      <div className="container py-4">
+      <div className="container py-3">
         <div className="row">
           <TabToggle isTierList={isTierList} setIsTierList={setIsTierList} />
         </div>

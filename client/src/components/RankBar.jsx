@@ -10,7 +10,7 @@ export default function RankBar({
 }) {
   const ranks = ["S", "A", "B", "C", "D", "F", "Sideboard"];
 
-  // Updates the card properties when currentCard changes
+  // Updates the rank when currentCard changes
   useEffect(() => {
     if (cardData.length > 0) {
       setRank(cardData[currentCard].rank);

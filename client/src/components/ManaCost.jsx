@@ -1,3 +1,4 @@
+/* eslint-disable react/self-closing-comp */
 export default function ManaCost({ manaCost }) {
   const attributes = {
     'W': 'ms ms-w ms-cost ms-shadow',
@@ -42,8 +43,9 @@ export default function ManaCost({ manaCost }) {
   }
 
   const symbols = extractValues(trimCost(manaCost)).map((value) => 
+    // eslint-disable-next-line react/jsx-key
     <i className={attributes[value]}></i>
   )
 
-  return <div className="d-flex align-items-center" style={{fontSize: '.875rem'}}>{symbols}</div>
+  return <div className="d-flex align-items-center" style={{fontSize: '.825rem'}}>{symbols}</div>
 }

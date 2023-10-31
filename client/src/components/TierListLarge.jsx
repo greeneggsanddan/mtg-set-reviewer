@@ -1,5 +1,4 @@
 import ManaCost from "./ManaCost";
-import "./TierListLarge.css";
 
 export default function TierListLarge({ cardData, setCardData }) {
   const ranks = ["S", "A", "B", "C", "D", "F", "Sideboard", "Unranked"];

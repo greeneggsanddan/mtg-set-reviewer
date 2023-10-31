@@ -1,3 +1,4 @@
+/* eslint-disable react/self-closing-comp */
 export default function CardNav({ currentCard, setCurrentCard, cardData }) {
   function decrementCard() {
     if (currentCard === 0) setCurrentCard(cardData.length - 1);
