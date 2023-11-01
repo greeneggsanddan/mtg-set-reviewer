@@ -2,7 +2,7 @@ import { useState } from "react";
 import ManaCost from "./ManaCost";
 import CardModal from "./CardModal";
 
-export default function TierList({ cardData, setCardData }) {
+export default function TierList({ cardData, setCardData, hover, setHover }) {
   const ranks = ["S", "A", "B", "C", "D", "F", "Sideboard", "Unranked"];
   const colors = ["W", "U", "B", "R", "G", "MC", "C"];
   const bgColors = {
@@ -31,6 +31,12 @@ export default function TierList({ cardData, setCardData }) {
     setShow(true);
     setCardId(id);
   }
+
+  function handleHover(id) {
+    setHover(id);
+  }
+
+  const handleMouseLeave = () => setHover(null);
 
   function trimName(str) {
     const index = str.indexOf("/");
@@ -70,6 +76,8 @@ export default function TierList({ cardData, setCardData }) {
               className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
               key={card.id}
               onClick={() => handleShow(card.id)}
+              onMouseEnter={() => handleHover(card.id)}
+              onMouseLeave={handleMouseLeave}
             >
               {trimName(card.name)}
               <ManaCost manaCost={card.mana_cost} />

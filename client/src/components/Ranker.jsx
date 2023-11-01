@@ -3,7 +3,7 @@ import CardStack from "./CardStack";
 import RankBar from "./RankBar";
 import CardNav from "./CardNav";
 
-export default function Ranker({ cardData, setCardData }) {
+export default function Ranker({ cardData, setCardData, hover }) {
   const [currentCard, setCurrentCard] = useState(0);
   const [cardRank, setCardRank] = useState(null);
 
@@ -22,6 +22,7 @@ export default function Ranker({ cardData, setCardData }) {
         setCurrentCard={setCurrentCard}
         cardRank={cardRank}
         setCardRank={setCardRank}
+        hover={hover}
       />
       <RankBar
         cardData={cardData}

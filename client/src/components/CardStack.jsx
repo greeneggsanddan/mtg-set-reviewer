@@ -9,7 +9,8 @@ export default function CardStack({
   currentCard,
   setCurrentCard,
   cardRank,
-  setCardRank
+  setCardRank,
+  hover
 }) {
   const [card, setCard] = useState({image: null, name: null});
 
@@ -35,6 +36,8 @@ export default function CardStack({
     if (e.over) setCardRank(e.over.id);
   }
 
+  const hoverCard = cardData.find((c) => c.id === hover);
+
   return (
     <div className="position-relative mb-3">
       <DndContext
@@ -42,6 +45,14 @@ export default function CardStack({
         onDragEnd={handleDragEnd}
         onDragOver={handleDragOver}
       >
+        {hover && (
+          <img
+            src={hoverCard.image}
+            alt={hoverCard.name}
+            className="w-100 position-absolute top-0"
+            style={{ borderRadius: ".75rem" }}
+          />
+        )}
         <DraggableCard>
           <img
             src={card.image}
