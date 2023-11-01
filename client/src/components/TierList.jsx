@@ -60,7 +60,7 @@ export default function TierList({ cardData, setCardData }) {
 
     return (
       sorted.length > 0 && (
-        <>
+        <div key={`${color}-${rank}`}>
           <div className="card-header text-center">{rank}</div>
           <div className="list-group list-group-flush">
             {cards.map((card) => (
@@ -75,7 +75,7 @@ export default function TierList({ cardData, setCardData }) {
               </button>
             ))}
           </div>
-        </>
+        </div>
       )
     );
   }
