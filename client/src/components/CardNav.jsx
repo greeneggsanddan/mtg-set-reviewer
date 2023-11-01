@@ -11,10 +11,10 @@ export default function CardNav({ currentCard, setCurrentCard, cardData }) {
   }
 
   return (
-    <div className="btn-group d-flex" role="group" aria-label="Card navigation">
+    <div className="btn-group bg-white d-flex" role="group" aria-label="Card navigation">
       <button
         type="button"
-        className="btn btn-outline-primary"
+        className="btn btn-outline-dark"
         onClick={decrementCard}
       >
         <i className="bi bi-chevron-left"></i>
@@ -22,7 +22,7 @@ export default function CardNav({ currentCard, setCurrentCard, cardData }) {
       </button>
       <button
         type="button"
-        className="btn btn-outline-primary"
+        className="btn btn-outline-dark"
         onClick={incrementCard}
       >
         <span>Next </span>

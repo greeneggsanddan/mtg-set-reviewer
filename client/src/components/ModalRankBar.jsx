@@ -17,7 +17,7 @@ export default function ModalRankBar({
       {ranks.map((rank) => (
         <button
           type="button"
-          className={`btn btn-outline-primary ${
+          className={`btn btn-outline-dark ${
             cardRank === rank ? "active" : ""
           }`}
           key={rank}

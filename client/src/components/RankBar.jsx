@@ -32,14 +32,14 @@ export default function RankBar({
 
   return (
     <div
-      className="btn-group d-flex mb-3"
+      className="btn-group bg-white d-flex mb-3"
       role="group"
       aria-label="Rank button group"
     >
       {ranks.map((rank) => (
         <button
           type="button"
-          className={`btn btn-outline-primary ${
+          className={`btn btn-outline-dark ${
             cardRank === rank ? "active" : ""
           }`}
           key={rank}

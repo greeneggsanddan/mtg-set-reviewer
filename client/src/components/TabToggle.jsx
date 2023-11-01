@@ -4,7 +4,7 @@ export default function TabToggle({ isTierList, setIsTierList }) {
   }
 
   return (
-    <div className="btn-group d-flex mb-3 d-xs-block d-md-none" role="group">
+    <div className="btn-group bg-white d-flex mb-3 d-xs-block d-md-none" role="group">
       <input
         type="radio"
         className="btn-check"
@@ -14,7 +14,7 @@ export default function TabToggle({ isTierList, setIsTierList }) {
         checked={isTierList}
         onChange={handleRadioChange}
       />
-      <label className="btn btn-outline-primary" htmlFor="tier-list-radio">
+      <label className="btn btn-outline-dark" htmlFor="tier-list-radio">
         Tier List
       </label>
       <input
@@ -26,7 +26,7 @@ export default function TabToggle({ isTierList, setIsTierList }) {
         checked={!isTierList}
         onChange={handleRadioChange}
       />
-      <label className="btn btn-outline-primary" htmlFor="ranking-radio">
+      <label className="btn btn-outline-dark" htmlFor="ranking-radio">
         Ranker
       </label>
     </div>
