@@ -42,9 +42,9 @@ export default function ManaCost({ manaCost }) {
     return values;
   }
 
-  const symbols = extractValues(trimCost(manaCost)).map((value) => 
-    // eslint-disable-next-line react/jsx-key
-    <i className={attributes[value]}></i>
+  const symbols = extractValues(trimCost(manaCost)).map((value, index) => 
+    // eslint-disable-next-line react/no-array-index-key
+    <i className={attributes[value]} key={index}></i>
   )
 
   return <div className="d-flex align-items-center" style={{fontSize: '.825rem'}}>{symbols}</div>
