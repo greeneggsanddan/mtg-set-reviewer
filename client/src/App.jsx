@@ -52,9 +52,9 @@ export default function App() {
   
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <nav className="navbar bg-purple border-bottom">
         <div className="container">
-          <a className="navbar-brand h1 mb-0" href="#">
+          <a className="navbar-brand text-white h1 mb-0" href="#">
             MTG Set Reviewer
           </a>
         </div>
