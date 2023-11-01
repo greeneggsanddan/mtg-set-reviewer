@@ -25,18 +25,17 @@ export default function TierList({ cardData, setCardData }) {
   };
 
   const [show, setShow] = useState(false);
+  const [cardId, setCardId] = useState(null);
 
-  const handleShow = () => setShow(true);
-
+  function handleShow(id) {
+    setShow(true);
+    setCardId(id);
+  }
 
   function trimName(str) {
     const index = str.indexOf("/");
     return index === -1 ? str : str.slice(0, index - 1);
   }
-
-  // function openModal() {
-  //   setShowModal(true);
-  // }
 
   // Displays cards of a specified color and rank
   function displayCards(color, rank) {
@@ -69,7 +68,7 @@ export default function TierList({ cardData, setCardData }) {
                 type="button"
                 className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
                 key={card.id}
-                onClick={handleShow}
+                onClick={() => handleShow(card.id)}
               >
                 {trimName(card.name)}
                 <ManaCost manaCost={card.mana_cost} />
@@ -87,7 +86,7 @@ export default function TierList({ cardData, setCardData }) {
         {colors.map((color) => (
           <div className="col" key={color}>
             <div className="card">
-              <div className={`card-header text-center ${bgColors[color]}`}>
+              <div className={`card-header text-center fw-medium ${bgColors[color]}`}>
                 {colorString[color]}
               </div>
               {ranks.map((rank) => displayCards(color, rank))}
@@ -98,6 +97,9 @@ export default function TierList({ cardData, setCardData }) {
       <CardModal
         show={show}
         setShow={setShow}
+        cardData={cardData}
+        setCardData={setCardData}
+        cardId={cardId}
       />
     </>
   );

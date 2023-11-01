@@ -31,7 +31,7 @@ export default function App() {
           const rankedCards = cards.map((card) => ({
             name: card.name,
             id: card.id,
-            image: card.image_uris.png,
+            image: card.image_uris.normal,
             mana_cost: card.mana_cost,
             cmc: card.cmc,
             colors: card.colors,
