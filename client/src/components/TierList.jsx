@@ -60,22 +60,22 @@ export default function TierList({ cardData, setCardData }) {
 
     return (
       sorted.length > 0 && (
-        <div key={`${color}-${rank}`}>
-          <div className="card-header text-center">{rank}</div>
-          <div className="list-group list-group-flush">
-            {cards.map((card) => (
-              <button
-                type="button"
-                className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-                key={card.id}
-                onClick={() => handleShow(card.id)}
-              >
-                {trimName(card.name)}
-                <ManaCost manaCost={card.mana_cost} />
-              </button>
-            ))}
+        <>
+          <div className="list-group-item bg-body-tertiary text-center">
+            {rank}
           </div>
-        </div>
+          {cards.map((card) => (
+            <button
+              type="button"
+              className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+              key={card.id}
+              onClick={() => handleShow(card.id)}
+            >
+              {trimName(card.name)}
+              <ManaCost manaCost={card.mana_cost} />
+            </button>
+          ))}
+        </>
       )
     );
   }
@@ -89,7 +89,7 @@ export default function TierList({ cardData, setCardData }) {
               <div className={`card-header text-center fw-medium ${bgColors[color]}`}>
                 {colorString[color]}
               </div>
-              {ranks.map((rank) => displayCards(color, rank))}
+              <div className="list-group list-group-flush">{ranks.map((rank) => displayCards(color, rank))}</div>
             </div>
           </div>
         ))}
