@@ -5,11 +5,11 @@ import CardNav from "./CardNav";
 
 export default function Ranker({ cardData, setCardData }) {
   const [currentCard, setCurrentCard] = useState(0);
-  const [rank, setRank] = useState(null);
+  const [cardRank, setCardRank] = useState(null);
 
   useEffect(() => {
     if (cardData.length > 0) {
-      setRank(cardData[currentCard].rank);
+      setCardRank(cardData[currentCard].rank);
     }
   }, [cardData, currentCard]);
   
@@ -20,14 +20,14 @@ export default function Ranker({ cardData, setCardData }) {
         setCardData={setCardData}
         currentCard={currentCard}
         setCurrentCard={setCurrentCard}
-        rank={rank}
-        setRank={setRank}
+        cardRank={cardRank}
+        setCardRank={setCardRank}
       />
       <RankBar
         cardData={cardData}
         setCardData={setCardData}
-        rank={rank}
-        setRank={setRank}
+        cardRank={cardRank}
+        setCardRank={setCardRank}
         currentCard={currentCard}
         setCurrentCard={setCurrentCard}
       />

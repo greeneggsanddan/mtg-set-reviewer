@@ -8,8 +8,8 @@ export default function CardStack({
   setCardData,
   currentCard,
   setCurrentCard,
-  rank,
-  setRank
+  cardRank,
+  setCardRank
 }) {
   const [card, setCard] = useState({image: null, name: null});
 
@@ -22,8 +22,7 @@ export default function CardStack({
   function handleDragEnd() {
     const updatedCards = cardData.map((c, index) => {
       if (index === currentCard) {
-        // eslint-disable-next-line object-shorthand
-        return { ...c, rank: rank };
+        return { ...c, rank: cardRank };
       }
       return c;
     });
@@ -33,7 +32,7 @@ export default function CardStack({
   }
 
   function handleDragOver(e) {
-    if (e.over) setRank(e.over.id);
+    if (e.over) setCardRank(e.over.id);
   }
 
   return (
@@ -44,10 +43,20 @@ export default function CardStack({
         onDragOver={handleDragOver}
       >
         <DraggableCard>
-          <img src={card.image} alt={card.name} className="w-100" style={{ borderRadius: '.75rem' }} />
+          <img
+            src={card.image}
+            alt={card.name}
+            className="w-100"
+            style={{ borderRadius: ".75rem" }}
+          />
         </DraggableCard>
         <DragOverlay>
-          <img src={card.image} alt={card.name} className="w-100" />
+          <img
+            src={card.image}
+            alt={card.name}
+            className="w-100"
+            style={{ borderRadius: ".75rem" }}
+          />
         </DragOverlay>
         <DroppableZone />
       </DndContext>

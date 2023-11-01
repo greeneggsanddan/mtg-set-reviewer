@@ -3,8 +3,8 @@ import { useEffect } from "react";
 export default function RankBar({
   cardData,
   setCardData,
-  rank,
-  setRank,
+  cardRank,
+  setCardRank,
   currentCard,
   setCurrentCard,
 }) {
@@ -13,7 +13,7 @@ export default function RankBar({
   // Updates the rank when currentCard changes
   useEffect(() => {
     if (cardData.length > 0) {
-      setRank(cardData[currentCard].rank);
+      setCardRank(cardData[currentCard].rank);
     }
   }, [currentCard, cardData]);
 
@@ -36,17 +36,17 @@ export default function RankBar({
       role="group"
       aria-label="Rank button group"
     >
-      {ranks.map((rankName) => (
+      {ranks.map((rank) => (
         <button
           type="button"
           className={`btn btn-outline-primary ${
-            rank === rankName ? "active" : ""
+            cardRank === rank ? "active" : ""
           }`}
-          key={rankName}
-          value={rankName}
+          key={rank}
+          value={rank}
           onClick={handleButtonClick}
         >
-          {rankName === "Sideboard" ? "SB" : rankName}
+          {rank === "Sideboard" ? "SB" : rank}
         </button>
       ))}
     </div>
