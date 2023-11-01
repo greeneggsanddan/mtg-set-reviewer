@@ -49,24 +49,21 @@ export default function CardStack({
           <img
             src={hoverCard.image}
             alt={hoverCard.name}
-            className="w-100 position-absolute top-0"
-            style={{ borderRadius: ".75rem" }}
+            className="w-100 position-absolute top-0 ranker-image"
           />
         )}
         <DraggableCard>
           <img
             src={card.image}
             alt={card.name}
-            className="w-100"
-            style={{ borderRadius: ".75rem" }}
+            className="w-100 ranker-image"
           />
         </DraggableCard>
         <DragOverlay>
           <img
             src={card.image}
             alt={card.name}
-            className="w-100"
-            style={{ borderRadius: ".75rem" }}
+            className="w-100 ranker-image"
           />
         </DragOverlay>
         <DroppableZone />

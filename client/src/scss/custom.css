@@ -1,4 +1,8 @@
 @charset "UTF-8";
+.ranker-image {
+  border-radius: 1.25rem;
+}
+
 /*!
  * Bootstrap  v5.3.2 (https://getbootstrap.com/)
  * Copyright 2011-2023 The Bootstrap Authors
@@ -11853,5 +11857,10 @@ textarea.form-control-lg {
   }
   .d-print-none {
     display: none !important;
+  }
+}
+@media (min-width: 768px) {
+  .ranker-image {
+    border-radius: 0.75rem;
   }
 }/*# sourceMappingURL=custom.css.map */

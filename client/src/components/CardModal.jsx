@@ -31,7 +31,7 @@ export default function CardModal({ show, setShow, cardData, setCardData, cardId
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Body>
-        <img src={card.image} alt={card.name} className="w-100 mb-3" style={{ borderRadius: '1rem' }} />
+        <img src={card.image} alt={card.name} className="w-100 mb-3" style={{ borderRadius: '1.25rem' }} />
         <ModalRankBar
           cardRank={cardRank}
           setCardRank={setCardRank}

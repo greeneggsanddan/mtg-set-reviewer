@@ -17,4 +17,14 @@ $grid-breakpoints: (
 
 $font-size-base: .925rem;
 
+.ranker-image {
+  border-radius: 1.25rem;
+}
+
 @import "../../node_modules/bootstrap/scss/bootstrap";
+
+@include media-breakpoint-up(md) {
+  .ranker-image {
+    border-radius: .75rem;
+  }
+}
