@@ -70,7 +70,6 @@ export default function App() {
             <TierList
               cardData={cardData}
               setCardData={setCardData}
-              hover={hover}
               setHover={setHover}
             />
           </div>
