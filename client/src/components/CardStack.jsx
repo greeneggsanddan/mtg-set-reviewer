@@ -44,7 +44,7 @@ export default function CardStack({
         onDragOver={handleDragOver}
       >
         <DraggableCard>
-          <img src={card.image} alt={card.name} className="w-100" />
+          <img src={card.image} alt={card.name} className="w-100" style={{ borderRadius: '.75rem' }} />
         </DraggableCard>
         <DragOverlay>
           <img src={card.image} alt={card.name} className="w-100" />
