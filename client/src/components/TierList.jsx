@@ -11,7 +11,7 @@ export default function TierList({ cardData, setCardData, setHover }) {
     B: "bg-dark-subtle",
     R: "bg-danger-subtle",
     G: "bg-success-subtle",
-    MC: "bg-warning",
+    MC: "bg-yellow-300",
     C: "bg-body-secondary",
   };
   const colorString = {
