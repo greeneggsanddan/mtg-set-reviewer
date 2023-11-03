@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import TabToggle from "./components/TabToggle";
 import TierList from "./components/TierList";
 import Ranker from "./components/Ranker";
-import "./App.css";
+import NavBar from "./components/NavBar";
 
 export default function App() {
   const [isTierList, setIsTierList] = useState(true);
@@ -52,13 +52,7 @@ export default function App() {
   
   return (
     <>
-      <nav className="navbar bg-purple border-bottom">
-        <div className="container">
-          <a className="navbar-brand text-white h1 mb-0" href="#">
-            MTG Set Reviewer
-          </a>
-        </div>
-      </nav>
+      <NavBar />git 
       <div className="container py-3">
         <div className="row">
           <TabToggle isTierList={isTierList} setIsTierList={setIsTierList} />
