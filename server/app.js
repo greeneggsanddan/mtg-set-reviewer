@@ -24,13 +24,8 @@ async function main() {
 
 main().catch((err) => console.log(err));
 
-const User = mongoose.model(
-  'User',
-  new Schema({
-    username: { type: String, required: true },
-    password: { type: String, required: true },
-  })
-)
+const User = require('./models/user');
+const Set = require('./models/set')
 
 // const indexRouter = require('./routes/index');
 // const usersRouter = require('./routes/users');
@@ -91,10 +86,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
-// Sends the username of the currently logged in user
+// Sends the username of the currently logged in user (For testing purposes)
 app.get('/api', (req, res) => {
-  console.log(req.user);
-  res.json({ user: req.user });
+  if (req.user) res.json({ username: req.user.username, sets: req.user.sets });
+  else console.log('The user is:', req.user);
 })
 
 app.get('/logout', (req, res, next) => {
@@ -113,6 +108,7 @@ app.post('/signup', async (req, res, next) => {
       const user = new User({
         username: req.body.username,
         password: hashedPassword,
+        sets: [],
       });
       await user.save();
       res.status(200).send('User saved');
@@ -125,8 +121,32 @@ app.post('/signup', async (req, res, next) => {
 app.post(
   "/login",
   passport.authenticate("local"), (req, res) => {
-    res.status(200).json({ username: req.user.username });
+    res.status(200).json({ username: req.user.username, sets: req.user.sets});
   }
 );
+
+app.post('/sets/:setId', async (req, res, next) => {
+  try {
+    const set = new Set({
+      user: req.user._id,
+      name: req.params.setId,
+      data: req.body
+    })
+    await set.save();
+    res.status(200).send('OK');
+  } catch (err) {
+    return next(err);
+  }
+});
+
+// app.put(
+//   '/:setId', async (req, res, next) => {
+//     try {
+
+//     }
+//     // PUT HTTP method on req.user's ${req.params.setId} resource
+//   }
+
+// )
 
 module.exports = app;
