@@ -2,7 +2,7 @@ import { useState } from "react";
 import ManaCost from "./ManaCost";
 import CardModal from "./CardModal";
 
-export default function TierList({ cardData, setCardData, setHover }) {
+export default function TierList({ cardData, setCardData, setHover, user }) {
   const ranks = ["S", "A", "B", "C", "D", "F", "Sideboard", "Unranked"];
   const colors = ["W", "U", "B", "R", "G", "MC", "C"];
   const bgColors = {
@@ -108,6 +108,7 @@ export default function TierList({ cardData, setCardData, setHover }) {
         cardData={cardData}
         setCardData={setCardData}
         cardId={cardId}
+        user={user}
       />
     </>
   );

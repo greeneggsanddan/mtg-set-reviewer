@@ -88,8 +88,11 @@ app.use(express.urlencoded({ extended: false }));
 
 // Sends the username of the currently logged in user (For testing purposes)
 app.get("/api", (req, res) => {
-  res.json({ username: req.user.username });
-  console.log(req.user);
+  if (req.user) {
+    res.json({ message: `Current user: ${req.user.username}` });
+  } else {
+    res.json({message: "No current user"})
+  }
 });
 
 app.get("/logout", (req, res, next) => {
@@ -103,40 +106,47 @@ app.get("/logout", (req, res, next) => {
 
 app.post("/signup", async (req, res, next) => {
   const { username } = req.body;
-  
+
   try {
     const existingUser = await User.findOne({ username });
 
     if (existingUser) {
       res.json({ exists: true });
     } else {
-      bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
-        if (err) return next(err);
-        const user = new User({
-          username,
-          password: hashedPassword,
-          sets: [],
+      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+      const user = new User({
+        username,
+        password: hashedPassword,
+        sets: [],
+      });
+      await user.save();
+
+      req.login(user, (err) => {
+        if (err) {
+          return next(err);
+        }
+        res.status(200).json({
+          message: `${username} saved and logged in`,
+          exists: false,
+          username
         });
-        await user.save();
-        res.status(200).json({ message: `${username} saved`, exists: false });
       });
     }
-
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
 app.post("/login", passport.authenticate("local"), async (req, res) => {
   try {
-    const user = await User.findById(req.user._id).populate('sets');
+    const user = await User.findById(req.user._id).populate("sets");
     const set = user.sets.find((s) => s.name === req.body.set);
     const data = set ? set.data : null;
     res.status(200).json({ username: req.user.username, data });
   } catch (err) {
     console.error(err);
-
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
@@ -148,12 +158,15 @@ app.post("/sets/:set", async (req, res) => {
       name: req.params.set,
       data: req.body,
     });
+
     await set.save();
 
     user.sets.push(set);
     await user.save();
 
-    res.status(200).json({ message: `${req.user.username} has created a set review for ${req.params.set}` });
+    res.status(200).json({
+      message: `${req.user.username} has created a set review for ${req.params.set}`,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal Server Error" });
@@ -166,7 +179,9 @@ app.put("/sets/:set", async (req, res) => {
       { name: req.params.set, user: req.user._id },
       { data: req.body },
     );
-    res.status(200).json({ message: `${req.user.username} has updated ${req.params.set}` });
+    res
+      .status(200)
+      .json({ message: `${req.user.username} has updated ${req.params.set}` });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal Server Error" });

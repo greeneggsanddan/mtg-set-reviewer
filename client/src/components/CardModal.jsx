@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import ModalRankBar from './ModalRankBar';
+import { saveData } from '../utils/utils';
 
-export default function CardModal({ show, setShow, cardData, setCardData, cardId }) {
-  const [card, setCard] = useState({ image: null, name: null });
+export default function CardModal({ show, setShow, cardData, setCardData, cardId, user }) {
+  const [card, setCard] = useState({ image_1: null, name: null });
   const [cardRank, setCardRank] = useState(null);
 
   useEffect(() => {
@@ -25,13 +26,14 @@ export default function CardModal({ show, setShow, cardData, setCardData, cardId
     });
 
     setCardData(updatedCards);
+    if (user) saveData(updatedCards, 'lci')
     setShow(false);
   }
 
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Body>
-        <img src={card.image} alt={card.name} className="w-100 mb-3" style={{ borderRadius: '1.25rem' }} />
+        <img src={card.image_1} alt={card.name} className="w-100 mb-3" style={{ borderRadius: '1.25rem' }} />
         <ModalRankBar
           cardRank={cardRank}
           setCardRank={setCardRank}

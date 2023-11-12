@@ -1,14 +1,39 @@
 import { useState } from "react";
-import Modal from "react-bootstrap/Modal";
+import "./NavBar.css";
+import Signup from "./Signup";
+import Login from "./Login";
 
-export default function NavBar() {
+export default function NavBar({ user, setUser, cardData, setCardData}) {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
 
-  const handleCloseLogin = () => setShowLogin(false);
-  const handleCloseSignup = () => setShowSignup(false);
+
   const handleOpenLogin = () => setShowLogin(true);
   const handleOpenSignup = () => setShowSignup(true);
+
+  async function handleLogout() {
+    try {
+      const response = await fetch("http://localhost:3000/logout", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: 'include',
+      });
+      if (response.ok) {
+        console.log("Logged out");
+        setUser(null);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function checkUser() {
+    const response = await fetch("http://localhost:3000/api", { credentials: 'include'});
+    const data = await response.json();
+    console.log(data.message);
+  }
 
   return (
     <>
@@ -21,12 +46,26 @@ export default function NavBar() {
             <button
               className="btn btn-outline-light"
               type="button"
+              onClick={checkUser}
+            >
+              Check
+            </button>
+            <button
+              className="btn btn-outline-light"
+              type="button"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+            <button
+              className="btn btn-outline-light"
+              type="button"
               onClick={handleOpenLogin}
             >
               Login
             </button>
             <button
-              className="btn btn-dark"
+              className="btn btn-light"
               type="button"
               onClick={handleOpenSignup}
             >
@@ -35,28 +74,14 @@ export default function NavBar() {
           </div>
         </div>
       </nav>
-      <Modal show={showLogin} onHide={handleCloseLogin} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Login</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Login Form</Modal.Body>
-        <Modal.Footer>
-          <button
-            type="button"
-            className="btn btn-outline-danger"
-            onClick={handleCloseLogin}
-          >
-            Cancel
-          </button>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={handleCloseLogin}
-          >
-            Save
-          </button>
-        </Modal.Footer>
-      </Modal>
+      <Login
+        showLogin={showLogin}
+        setShowLogin={setShowLogin}
+        setUser={setUser}
+        cardData={cardData}
+        setCardData={setCardData}
+      />
+      <Signup showSignup={showSignup} setShowSignup={setShowSignup} setUser={setUser} cardData={cardData} />
     </>
   );
 }

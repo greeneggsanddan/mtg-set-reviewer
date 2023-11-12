@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { saveData } from "../utils/utils";
 
 export default function RankBar({
   cardData,
@@ -7,6 +8,7 @@ export default function RankBar({
   setCardRank,
   currentCard,
   setCurrentCard,
+  user,
 }) {
   const ranks = ["S", "A", "B", "C", "D", "F", "Sideboard"];
 
@@ -26,6 +28,7 @@ export default function RankBar({
     });
 
     setCardData(updatedCards);
+    if (user) saveData(updatedCards, 'lci');
     if (currentCard === cardData.length - 1) setCurrentCard(0);
     else setCurrentCard(currentCard + 1);
   }
