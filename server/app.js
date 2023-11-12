@@ -1,13 +1,13 @@
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const session = require("express-session");
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 
-const cors = require('cors');
+const cors = require("cors");
 
 const mongoose = require("mongoose");
 
@@ -24,8 +24,8 @@ async function main() {
 
 main().catch((err) => console.log(err));
 
-const User = require('./models/user');
-const Set = require('./models/set')
+const User = require("./models/user");
+const Set = require("./models/set");
 
 // const indexRouter = require('./routes/index');
 // const usersRouter = require('./routes/users');
@@ -37,16 +37,16 @@ passport.use(
       const user = await User.findOne({ username: username });
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
-      };
+      }
       const match = await bcrypt.compare(password, user.password);
       if (!match) {
         return done(null, false, { message: "Incorrect password" });
       }
       return done(null, user);
-    } catch(err) {
+    } catch (err) {
       return done(err);
-    };
-  })
+    }
+  }),
 );
 
 passport.serializeUser((user, done) => {
@@ -59,7 +59,7 @@ passport.deserializeUser(async (id, done) => {
     done(null, user);
   } catch (err) {
     done(err);
-  };
+  }
 });
 
 const app = express();
@@ -74,10 +74,10 @@ app.use(
     credentials: true,
   }),
 );
-app.use(logger('dev'));
+app.use(logger("dev"));
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(
   session({ secret: "brushwagg", resave: false, saveUninitialized: true }),
@@ -87,66 +87,90 @@ app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
 // Sends the username of the currently logged in user (For testing purposes)
-app.get('/api', (req, res) => {
-  if (req.user) res.json({ username: req.user.username, sets: req.user.sets });
-  else console.log('The user is:', req.user);
-})
+app.get("/api", (req, res) => {
+  res.json({ username: req.user.username });
+  console.log(req.user);
+});
 
-app.get('/logout', (req, res, next) => {
+app.get("/logout", (req, res, next) => {
   req.logout((err) => {
     if (err) {
       return next(err);
     }
-    res.status(200).send('User logged out');
-  })
-})
+    res.status(200).send("User logged out");
+  });
+});
 
-app.post('/signup', async (req, res, next) => {
+app.post("/signup", async (req, res, next) => {
+  const { username } = req.body;
+  
   try {
-    bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
-      if (err) return next(err);
-      const user = new User({
-        username: req.body.username,
-        password: hashedPassword,
-        sets: [],
+    const existingUser = await User.findOne({ username });
+
+    if (existingUser) {
+      res.json({ exists: true });
+    } else {
+      bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+        if (err) return next(err);
+        const user = new User({
+          username,
+          password: hashedPassword,
+          sets: [],
+        });
+        await user.save();
+        res.status(200).json({ message: `${username} saved`, exists: false });
       });
-      await user.save();
-      res.status(200).send('User saved');
-    });
+    }
+
   } catch (err) {
-    return next(err);
+    console.error(err);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
-app.post(
-  "/login",
-  passport.authenticate("local"), (req, res) => {
-    res.status(200).json({ username: req.user.username, sets: req.user.sets});
-  }
-);
-
-app.post('/sets/:setId', async (req, res, next) => {
+app.post("/login", passport.authenticate("local"), async (req, res) => {
   try {
+    const user = await User.findById(req.user._id).populate('sets');
+    const set = user.sets.find((s) => s.name === req.body.set);
+    const data = set ? set.data : null;
+    res.status(200).json({ username: req.user.username, data });
+  } catch (err) {
+    console.error(err);
+
+  }
+});
+
+app.post("/sets/:set", async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
     const set = new Set({
       user: req.user._id,
-      name: req.params.setId,
-      data: req.body
-    })
+      name: req.params.set,
+      data: req.body,
+    });
     await set.save();
-    res.status(200).send('OK');
+
+    user.sets.push(set);
+    await user.save();
+
+    res.status(200).json({ message: `${req.user.username} has created a set review for ${req.params.set}` });
   } catch (err) {
-    return next(err);
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-// app.put(
-//   '/:setId', async (req, res, next) => {
-//     try {
-
-//     }
-//     // PUT HTTP method on req.user's ${req.params.setId} resource
-//   }
-
-// )
+app.put("/sets/:set", async (req, res) => {
+  try {
+    await Set.findOneAndUpdate(
+      { name: req.params.set, user: req.user._id },
+      { data: req.body },
+    );
+    res.status(200).json({ message: `${req.user.username} has updated ${req.params.set}` });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 module.exports = app;
