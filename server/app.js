@@ -15,7 +15,7 @@ const indexRouter = require('./routes/index');
 passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
-      const user = await User.findOne({ username: username });
+      const user = await User.findOne({ username });
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
       }

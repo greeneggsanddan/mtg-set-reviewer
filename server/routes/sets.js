@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 
 const Set = require("../models/set");
@@ -21,8 +22,7 @@ router.post("/:set", async (req, res) => {
       message: `${req.user.username} has created a set review for ${req.params.set}`,
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ message: "Internal Server Error", error: err});
   }
 });
 
@@ -36,8 +36,7 @@ router.put("/:set", async (req, res) => {
       .status(200)
       .json({ message: `${req.user.username} has updated ${req.params.set}` });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ message: "Internal Server Error", error: err });
   }
 });
 

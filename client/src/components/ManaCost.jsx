@@ -47,5 +47,5 @@ export default function ManaCost({ manaCost }) {
     <i className={attributes[value]} key={index}></i>
   )
 
-  return <div className="d-flex align-items-center" style={{fontSize: '.825rem'}}>{symbols}</div>
+  return <div className="d-flex align-items-center" style={{fontSize: '.8125rem'}}>{symbols}</div>
 }

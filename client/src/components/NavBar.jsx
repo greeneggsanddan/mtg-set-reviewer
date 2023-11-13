@@ -22,6 +22,7 @@ export default function NavBar({ user, setUser, cardData, setCardData }) {
       if (response.ok) {
         console.log("Logged out");
         setUser(null);
+        
       }
     } catch (error) {
       console.log(error);

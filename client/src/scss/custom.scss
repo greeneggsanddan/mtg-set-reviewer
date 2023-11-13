@@ -1,9 +1,15 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/variables-dark";
+
+$font-size-base: 0.925rem;
+
 $container-max-widths: (
   sm: 540px,
   md: 720px,
   lg: 1320px,
   xl: 1800px,
-  xxl: 1920px
+  xxl: 1920px,
 );
 
 $grid-breakpoints: (
@@ -12,21 +18,30 @@ $grid-breakpoints: (
   md: 768px,
   lg: 1400px,
   xl: 1820px,
-  xxl: 2080px
+  xxl: 2080px,
 );
 
-$font-size-base: .925rem;
+@import "../../node_modules/bootstrap/scss/maps";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/utilities";
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "margin-start": null,
+  )
+);
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/bootstrap/scss/utilities/api";
 
 .ranker-image {
   border-radius: 1.25rem;
 }
 
-
-@import "../../node_modules/bootstrap/scss/bootstrap";
-
 @include media-breakpoint-up(md) {
   .ranker-image {
-    border-radius: .75rem;
+    border-radius: 0.75rem;
   }
 }
 

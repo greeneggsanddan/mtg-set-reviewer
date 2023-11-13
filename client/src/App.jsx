@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 import { useEffect, useState } from "react";
 import TabToggle from "./components/TabToggle";
 import TierList from "./components/TierList";
@@ -68,7 +69,12 @@ export default function App() {
 
   return (
     <>
-      <NavBar user={user} setUser={setUser} cardData={cardData} setCardData={setCardData}/>
+      <NavBar
+        user={user}
+        setUser={setUser}
+        cardData={cardData}
+        setCardData={setCardData}
+      />
       <div className="container py-3">
         <div className="row">
           <TabToggle isTierList={isTierList} setIsTierList={setIsTierList} />
