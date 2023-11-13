@@ -42,7 +42,7 @@ export default function CardStack({
   const hoverCard = cardData.find((c) => c.id === hover);
 
   return (
-    <div className="position-relative mb-3">
+    <div className="position-relative mb-3" style={{ zIndex: "-2" }}>
       <DndContext
         collisionDetection={pointerWithin}
         onDragEnd={handleDragEnd}
