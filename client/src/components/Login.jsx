@@ -8,9 +8,16 @@ export default function Login({ showLogin, setShowLogin, setUser, cardData, setC
     set: 'lci',
   });
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleCloseLogin = () => setShowLogin(false);
   const togglePasswordVisibility = () => setPasswordVisible(!passwordVisible);
+
+  function handleCloseLogin() {
+    setPasswordVisible(false);
+    setFormData({ username: "", password: "", set: "lci" });
+    setError(null);
+    setShowLogin(false);
+  }
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -50,11 +57,13 @@ export default function Login({ showLogin, setShowLogin, setUser, cardData, setC
           const status = await apiResponse.json();
           console.log(status.message);
         }
+
+        handleCloseLogin();
       } else {
-        // User was not authenticated
+        setError("That information doesn't match our records.");
       }
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      setError("Network error. Try again later.");
     }
   }
 
@@ -76,6 +85,7 @@ export default function Login({ showLogin, setShowLogin, setUser, cardData, setC
                 value={formData.username}
                 onChange={handleChange}
                 maxLength="20"
+                required
               />
               <label htmlFor="username">Username</label>
             </div>
@@ -89,8 +99,12 @@ export default function Login({ showLogin, setShowLogin, setUser, cardData, setC
                 value={formData.password}
                 onChange={handleChange}
                 maxLength="32"
+                required
               />
               <label htmlFor="password">Password</label>
+              {error && (
+                <div className="text-danger form-label">{error}</div>
+              )}
             </div>
             <div className="form-check">
               <input
