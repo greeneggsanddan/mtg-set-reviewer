@@ -12,7 +12,7 @@ export default function NavBar({ user, setUser, cardData, setCardData }) {
 
   async function handleLogout() {
     try {
-      const response = await fetch("http://localhost:3000/logout", {
+      const response = await fetch("http://localhost:3000/auth/logout", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

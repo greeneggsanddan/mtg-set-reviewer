@@ -5,31 +5,12 @@ const logger = require("morgan");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const session = require("express-session");
-const bcrypt = require("bcryptjs");
-
+const bcrypt = require('bcryptjs');
 const cors = require("cors");
-
 const mongoose = require("mongoose");
 
-const Schema = mongoose.Schema;
-
-mongoose.set("strictQuery", false);
-// Change this
-const mongoDB =
-  "mongodb+srv://greeneggsanddan:ZRxKxUPqGyu2U4vT@setreviewcluster.re3n16y.mongodb.net/set_review?retryWrites=true&w=majority";
-
-async function main() {
-  await mongoose.connect(mongoDB);
-}
-
-main().catch((err) => console.log(err));
-
-const User = require("./models/user");
-const Set = require("./models/set");
-
-// const indexRouter = require('./routes/index');
-// const usersRouter = require('./routes/users');
-// const setRouter = require('./routes/sets');
+const User = require('./models/user')
+const indexRouter = require('./routes/index');
 
 passport.use(
   new LocalStrategy(async (username, password, done) => {
@@ -62,11 +43,18 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-const app = express();
+mongoose.set("strictQuery", false);
+// Change this
+const mongoDB =
+  "mongodb+srv://greeneggsanddan:ZRxKxUPqGyu2U4vT@setreviewcluster.re3n16y.mongodb.net/set_review?retryWrites=true&w=majority";
 
-// app.use("/", indexRouter);
-// app.use("/users", usersRouter);
-// app.use("/sets", setRouter);
+async function main() {
+  await mongoose.connect(mongoDB);
+}
+
+main().catch((err) => console.log(err));
+
+const app = express();
 
 app.use(
   cors({
@@ -78,7 +66,6 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-
 app.use(
   session({ secret: "brushwagg", resave: false, saveUninitialized: true }),
 );
@@ -86,105 +73,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
+app.use("/", indexRouter);
+
 // Sends the username of the currently logged in user (For testing purposes)
 app.get("/api", (req, res) => {
   if (req.user) {
     res.json({ message: `Current user: ${req.user.username}` });
   } else {
-    res.json({message: "No current user"})
-  }
-});
-
-app.get("/logout", (req, res, next) => {
-  req.logout((err) => {
-    if (err) {
-      return next(err);
-    }
-    res.status(200).send("User logged out");
-  });
-});
-
-app.post("/signup", async (req, res, next) => {
-  const { username } = req.body;
-
-  try {
-    const existingUser = await User.findOne({ username });
-
-    if (existingUser) {
-      res.json({ exists: true });
-    } else {
-      const hashedPassword = await bcrypt.hash(req.body.password, 10);
-      const user = new User({
-        username,
-        password: hashedPassword,
-        sets: [],
-      });
-      await user.save();
-
-      req.login(user, (err) => {
-        if (err) {
-          return next(err);
-        }
-        res.status(200).json({
-          message: `${username} saved and logged in`,
-          exists: false,
-          username
-        });
-      });
-    }
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
-app.post("/login", passport.authenticate("local"), async (req, res) => {
-  try {
-    const user = await req.user.populate("sets");
-    const set = user.sets.find((s) => s.code === req.body.set);
-    const data = set ? set.data : null;
-    res.status(200).json({ username: req.user.username, data });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
-app.post("/sets/:set", async (req, res) => {
-  try {
-    const { user } = req;
-    const set = new Set({
-      user: user._id,
-      code: req.params.set,
-      data: req.body,
-    });
-
-    await set.save();
-
-    user.sets.push(set);
-    await user.save();
-
-    res.status(200).json({
-      message: `${req.user.username} has created a set review for ${req.params.set}`,
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
-app.put("/sets/:set", async (req, res) => {
-  try {
-    await Set.findOneAndUpdate(
-      { code: req.params.set, user: req.user._id },
-      { data: req.body },
-    );
-    res
-      .status(200)
-      .json({ message: `${req.user.username} has updated ${req.params.set}` });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.json({ message: "No current user" });
   }
 });
 

@@ -15,6 +15,7 @@ export default function Signup({ showSignup, setShowSignup, setUser, cardData })
   function handleCloseSignup() {
     setPasswordVisible(false);
     setFormData({ username: "", password: "", set: "lci" });
+    setUserExists(false);
     setShowSignup(false);
   }
 
@@ -27,7 +28,7 @@ export default function Signup({ showSignup, setShowSignup, setUser, cardData })
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/signup", {
+      const response = await fetch("http://localhost:3000/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -52,7 +53,6 @@ export default function Signup({ showSignup, setShowSignup, setUser, cardData })
           credentials: "include",
         });
 
-        setUserExists(false);
         handleCloseSignup();
       }
     } catch (error) {
