@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const SetSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: "User" },
-  name: { type: String, required: true },
+  code: { type: String, required: true },
   data: [
     {
       name: String,

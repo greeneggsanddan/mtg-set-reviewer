@@ -140,8 +140,8 @@ app.post("/signup", async (req, res, next) => {
 
 app.post("/login", passport.authenticate("local"), async (req, res) => {
   try {
-    const user = await User.findById(req.user._id).populate("sets");
-    const set = user.sets.find((s) => s.name === req.body.set);
+    const user = await req.user.populate("sets");
+    const set = user.sets.find((s) => s.code === req.body.set);
     const data = set ? set.data : null;
     res.status(200).json({ username: req.user.username, data });
   } catch (err) {
@@ -152,10 +152,10 @@ app.post("/login", passport.authenticate("local"), async (req, res) => {
 
 app.post("/sets/:set", async (req, res) => {
   try {
-    const user = await User.findById(req.user._id);
+    const { user } = req;
     const set = new Set({
-      user: req.user._id,
-      name: req.params.set,
+      user: user._id,
+      code: req.params.set,
       data: req.body,
     });
 
@@ -176,7 +176,7 @@ app.post("/sets/:set", async (req, res) => {
 app.put("/sets/:set", async (req, res) => {
   try {
     await Set.findOneAndUpdate(
-      { name: req.params.set, user: req.user._id },
+      { code: req.params.set, user: req.user._id },
       { data: req.body },
     );
     res

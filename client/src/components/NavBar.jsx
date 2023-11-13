@@ -3,10 +3,9 @@ import "./NavBar.css";
 import Signup from "./Signup";
 import Login from "./Login";
 
-export default function NavBar({ user, setUser, cardData, setCardData}) {
+export default function NavBar({ user, setUser, cardData, setCardData }) {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
-
 
   const handleOpenLogin = () => setShowLogin(true);
   const handleOpenSignup = () => setShowSignup(true);
@@ -18,7 +17,7 @@ export default function NavBar({ user, setUser, cardData, setCardData}) {
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: 'include',
+        credentials: "include",
       });
       if (response.ok) {
         console.log("Logged out");
@@ -30,7 +29,9 @@ export default function NavBar({ user, setUser, cardData, setCardData}) {
   }
 
   async function checkUser() {
-    const response = await fetch("http://localhost:3000/api", { credentials: 'include'});
+    const response = await fetch("http://localhost:3000/api", {
+      credentials: "include",
+    });
     const data = await response.json();
     console.log(data.message);
   }
@@ -81,7 +82,12 @@ export default function NavBar({ user, setUser, cardData, setCardData}) {
         cardData={cardData}
         setCardData={setCardData}
       />
-      <Signup showSignup={showSignup} setShowSignup={setShowSignup} setUser={setUser} cardData={cardData} />
+      <Signup
+        showSignup={showSignup}
+        setShowSignup={setShowSignup}
+        setUser={setUser}
+        cardData={cardData}
+      />
     </>
   );
 }
