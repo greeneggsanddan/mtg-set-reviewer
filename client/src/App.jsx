@@ -10,6 +10,7 @@ export default function App() {
   const [isTierList, setIsTierList] = useState(true);
   const [cardData, setCardData] = useState([]);
   const [hover, setHover] = useState(null);
+  const [currentCard, setCurrentCard] = useState(0);
 
   async function fetchCardData() {
     let mounted = true;
@@ -30,7 +31,7 @@ export default function App() {
       }
 
       // Maps scryfall api data to necessary properties
-      const mappedCards = cards.map((card) => {
+      const mappedCards = cards.map((card, index) => {
         const isDFC =
           card.layout === "transform" || card.layout === "modal-dfc";
         const imageOne = isDFC
@@ -43,6 +44,7 @@ export default function App() {
         return {
           name: card.name,
           id: card.id,
+          index,
           dfc: isDFC,
           image_1: imageOne,
           image_2: imageTwo,
@@ -74,6 +76,7 @@ export default function App() {
         setUser={setUser}
         cardData={cardData}
         setCardData={setCardData}
+        setCurrentCard={setCurrentCard}
       />
       <div className="container py-3">
         <div className="row">
@@ -88,6 +91,7 @@ export default function App() {
               setCardData={setCardData}
               setHover={setHover}
               user={user}
+              setCurrentCard={setCurrentCard}
             />
           </div>
           <div
@@ -98,6 +102,8 @@ export default function App() {
             <Ranker
               cardData={cardData}
               setCardData={setCardData}
+              currentCard={currentCard}
+              setCurrentCard={setCurrentCard}
               hover={hover}
               user={user}
             />

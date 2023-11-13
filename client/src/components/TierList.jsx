@@ -2,7 +2,7 @@ import { useState } from "react";
 import ManaCost from "./ManaCost";
 import CardModal from "./CardModal";
 
-export default function TierList({ cardData, setCardData, setHover, user }) {
+export default function TierList({ cardData, setCardData, setHover, user, setCurrentCard }) {
   const ranks = ["S", "A", "B", "C", "D", "F", "Sideboard", "Unranked"];
   const colors = ["W", "U", "B", "R", "G", "MC", "C"];
   const bgColors = {
@@ -27,9 +27,10 @@ export default function TierList({ cardData, setCardData, setHover, user }) {
   const [show, setShow] = useState(false);
   const [cardId, setCardId] = useState(null);
 
-  function handleShow(id) {
+  function handleShow(id, index) {
     setShow(true);
     setCardId(id);
+    // setCurrentCard(index);
   }
 
   function handleHover(id) {
@@ -75,11 +76,11 @@ export default function TierList({ cardData, setCardData, setHover, user }) {
               type="button"
               className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
               key={card.id}
-              onClick={() => handleShow(card.id)}
+              onClick={() => handleShow(card.id, card.index)}
               onMouseEnter={() => handleHover(card.id)}
               onMouseLeave={handleMouseLeave}
             >
-              {trimName(card.name)}
+              <div className="me-1">{trimName(card.name)}</div>
               <ManaCost manaCost={card.mana_cost} />
             </button>
           ))}
@@ -109,6 +110,7 @@ export default function TierList({ cardData, setCardData, setHover, user }) {
         setCardData={setCardData}
         cardId={cardId}
         user={user}
+        setCurrentCard={setCurrentCard}
       />
     </>
   );

@@ -47,7 +47,7 @@ export default function CardModal({ show, setShow, cardData, setCardData, cardId
         >
           Cancel
         </button>
-        <button type="button" className="btn btn-primary" onClick={handleSave}>
+        <button type="button" className="btn btn-dark" onClick={handleSave}>
           Save
         </button>
       </Modal.Footer>

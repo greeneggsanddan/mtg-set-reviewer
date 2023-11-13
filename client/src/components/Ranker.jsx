@@ -3,8 +3,7 @@ import CardStack from "./CardStack";
 import RankBar from "./RankBar";
 import CardNav from "./CardNav";
 
-export default function Ranker({ cardData, setCardData, hover, user }) {
-  const [currentCard, setCurrentCard] = useState(0);
+export default function Ranker({ cardData, setCardData, currentCard, setCurrentCard, hover, user }) {
   const [cardRank, setCardRank] = useState(null);
 
   useEffect(() => {

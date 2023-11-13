@@ -1,9 +1,9 @@
 import { useState } from "react";
-import "./NavBar.css";
 import Signup from "./Signup";
 import Login from "./Login";
+import "./NavBar.css";
 
-export default function NavBar({ user, setUser, cardData, setCardData }) {
+export default function NavBar({ user, setUser, cardData, setCardData, setCurrentCard }) {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
 
@@ -22,7 +22,7 @@ export default function NavBar({ user, setUser, cardData, setCardData }) {
       if (response.ok) {
         console.log("Logged out");
         setUser(null);
-        
+        setCurrentCard(0);
       }
     } catch (error) {
       console.log(error);
@@ -82,6 +82,7 @@ export default function NavBar({ user, setUser, cardData, setCardData }) {
         setUser={setUser}
         cardData={cardData}
         setCardData={setCardData}
+        setCurrentCard={setCurrentCard}
       />
       <Signup
         showSignup={showSignup}

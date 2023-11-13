@@ -1,7 +1,7 @@
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
 
-export default function Login({ showLogin, setShowLogin, setUser, cardData, setCardData}) {
+export default function Login({ showLogin, setShowLogin, setUser, cardData, setCardData, setCurrentCard}) {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -45,6 +45,7 @@ export default function Login({ showLogin, setShowLogin, setUser, cardData, setC
         if (authenticated.data) {
           console.log("User has existing set data");
           setCardData(authenticated.data);
+          setCurrentCard(0);
         } else {
           const apiResponse = await fetch("http://localhost:3000/sets/lci", {
             method: "POST",

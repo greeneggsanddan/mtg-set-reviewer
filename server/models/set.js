@@ -9,6 +9,7 @@ const SetSchema = new Schema({
     {
       name: String,
       id: String,
+      index: Number,
       dfc: Boolean,
       image_1: String,
       image_2: String,
