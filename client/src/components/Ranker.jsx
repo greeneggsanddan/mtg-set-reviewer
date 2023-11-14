@@ -5,6 +5,7 @@ import CardNav from "./CardNav";
 
 export default function Ranker({ cardData, setCardData, currentCard, setCurrentCard, hover, user }) {
   const [cardRank, setCardRank] = useState(null);
+  const [cardFace, setCardFace] = useState(true);
 
   useEffect(() => {
     if (cardData.length > 0) {
@@ -23,6 +24,8 @@ export default function Ranker({ cardData, setCardData, currentCard, setCurrentC
         setCardRank={setCardRank}
         hover={hover}
         user={user}
+        cardFace={cardFace}
+        setCardFace={setCardFace}
       />
       <RankBar
         cardData={cardData}
@@ -38,6 +41,8 @@ export default function Ranker({ cardData, setCardData, currentCard, setCurrentC
         setCurrentCard={setCurrentCard}
         cardData={cardData}
         setCardData={setCardData}
+        cardFace={cardFace}
+        setCardFace={setCardFace}
       />
     </div>
   );

@@ -1,14 +1,28 @@
 /* eslint-disable react/self-closing-comp */
-export default function CardNav({ currentCard, setCurrentCard, cardData }) {
+import { useState, useEffect } from "react";
+
+export default function CardNav({ currentCard, setCurrentCard, cardData, cardFace, setCardFace }) {
+  const [card, setCard] = useState({ dfc: null });
+
+  useEffect(() => {
+    if (cardData.length > 0) {
+      setCard(cardData[currentCard]);
+    }
+  }, [cardData, currentCard]);
+
   function decrementCard() {
     if (currentCard === 0) setCurrentCard(cardData.length - 1);
     else setCurrentCard(currentCard - 1);
+    setCardFace(true);
   }
-
+  
   function incrementCard() {
     if (currentCard === cardData.length - 1) setCurrentCard(0);
     else setCurrentCard(currentCard + 1);
+    setCardFace(true);
   }
+
+  const handleTransform = () => setCardFace(!cardFace)
 
   return (
     <div className="btn-group bg-white d-flex" role="group" aria-label="Card navigation">
@@ -20,6 +34,12 @@ export default function CardNav({ currentCard, setCurrentCard, cardData }) {
         <i className="bi bi-chevron-left"></i>
         <span> Prev</span>
       </button>
+      {card.dfc ? (
+        <button className="btn btn-outline-dark" type="button" onClick={handleTransform}>
+          <i className="bi bi-arrow-repeat"></i>
+          <span> Transform</span>
+        </button>
+      ) : null}
       <button
         type="button"
         className="btn btn-outline-dark"
