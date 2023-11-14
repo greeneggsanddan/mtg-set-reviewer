@@ -40,7 +40,6 @@ export default function Signup({
         },
         body: JSON.stringify(formData),
         credentials: "include",
-        mode: "cors",
       });
       const data = await response.json();
       setUser(data.username);
@@ -56,7 +55,6 @@ export default function Signup({
           },
           body: JSON.stringify(cardData),
           credentials: "include",
-          mode: "cors",
         });
 
         handleCloseSignup();
