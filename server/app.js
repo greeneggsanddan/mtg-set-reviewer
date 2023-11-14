@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
@@ -5,12 +6,12 @@ const logger = require("morgan");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const session = require("express-session");
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
-const User = require('./models/user')
-const indexRouter = require('./routes/index');
+const User = require("./models/user");
+const indexRouter = require("./routes/index");
 
 passport.use(
   new LocalStrategy(async (username, password, done) => {
@@ -44,9 +45,7 @@ passport.deserializeUser(async (id, done) => {
 });
 
 mongoose.set("strictQuery", false);
-// Change this
-const mongoDB =
-  "mongodb+srv://greeneggsanddan:ZRxKxUPqGyu2U4vT@setreviewcluster.re3n16y.mongodb.net/set_review?retryWrites=true&w=majority";
+const mongoDB =`${process.env.DATABASE_URL}`;
 
 async function main() {
   await mongoose.connect(mongoDB);
@@ -58,7 +57,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://mtg-set-reviewer.netlify.app/",
     credentials: true,
   }),
 );
