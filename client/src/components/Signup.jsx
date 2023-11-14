@@ -1,17 +1,22 @@
 import Modal from "react-bootstrap/Modal";
 import { useEffect, useState } from "react";
 
-export default function Signup({ showSignup, setShowSignup, setUser, cardData }) {
+export default function Signup({
+  showSignup,
+  setShowSignup,
+  setUser,
+  cardData,
+}) {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    set: 'lci',
+    set: "lci",
   });
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [userExists, setUserExists] = useState(false);
 
   const togglePasswordVisibility = () => setPasswordVisible(!passwordVisible);
-  
+
   function handleCloseSignup() {
     setPasswordVisible(false);
     setFormData({ username: "", password: "", set: "lci" });
@@ -38,8 +43,7 @@ export default function Signup({ showSignup, setShowSignup, setUser, cardData })
       });
       const data = await response.json();
       setUser(data.username);
-      console.log(data.message);
-      
+
       if (data.exists) {
         setUserExists(true);
       } else {

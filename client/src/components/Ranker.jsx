@@ -3,7 +3,14 @@ import CardStack from "./CardStack";
 import RankBar from "./RankBar";
 import CardNav from "./CardNav";
 
-export default function Ranker({ cardData, setCardData, currentCard, setCurrentCard, hover, user }) {
+export default function Ranker({
+  cardData,
+  setCardData,
+  currentCard,
+  setCurrentCard,
+  hover,
+  user,
+}) {
   const [cardRank, setCardRank] = useState(null);
   const [cardFace, setCardFace] = useState(true);
 
@@ -12,9 +19,9 @@ export default function Ranker({ cardData, setCardData, currentCard, setCurrentC
       setCardRank(cardData[currentCard].rank);
     }
   }, [cardData, currentCard]);
-  
+
   return (
-    <div className="sticky-top d-flex flex-column" style={{ top: "1rem" }}>
+    <div className="sticky-top d-grid gap-3" style={{ top: "1rem" }}>
       <CardStack
         cardData={cardData}
         setCardData={setCardData}

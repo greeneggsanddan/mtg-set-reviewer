@@ -1,11 +1,18 @@
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
 
-export default function Login({ showLogin, setShowLogin, setUser, cardData, setCardData, setCurrentCard}) {
+export default function Login({
+  showLogin,
+  setShowLogin,
+  setUser,
+  cardData,
+  setCardData,
+  setCurrentCard,
+}) {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    set: 'lci',
+    set: "lci",
   });
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [error, setError] = useState(null);
@@ -34,29 +41,25 @@ export default function Login({ showLogin, setShowLogin, setUser, cardData, setC
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-        credentials: 'include',
+        credentials: "include",
       });
-      
+
       if (response.ok) {
         const authenticated = await response.json();
-        console.log(`${authenticated.username} is logged in`);
         setUser(authenticated.username);
 
         if (authenticated.data) {
-          console.log("User has existing set data");
           setCardData(authenticated.data);
           setCurrentCard(0);
         } else {
-          const apiResponse = await fetch("http://localhost:3000/sets/lci", {
+          await fetch("http://localhost:3000/sets/lci", {
             method: "POST",
             headers: {
-            "Content-Type": "application/json",
+              "Content-Type": "application/json",
             },
             body: JSON.stringify(cardData),
-            credentials: 'include',
+            credentials: "include",
           });
-          const status = await apiResponse.json();
-          console.log(status.message);
         }
 
         handleCloseLogin();
@@ -103,9 +106,7 @@ export default function Login({ showLogin, setShowLogin, setUser, cardData, setC
                 required
               />
               <label htmlFor="password">Password</label>
-              {error && (
-                <div className="text-danger form-label">{error}</div>
-              )}
+              {error && <div className="text-danger form-label">{error}</div>}
             </div>
             <div className="form-check">
               <input

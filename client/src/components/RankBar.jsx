@@ -28,14 +28,14 @@ export default function RankBar({
     });
 
     setCardData(updatedCards);
-    if (user) saveData(updatedCards, 'lci');
+    if (user) saveData(updatedCards, "lci");
     if (currentCard === cardData.length - 1) setCurrentCard(0);
     else setCurrentCard(currentCard + 1);
   }
 
   return (
     <div
-      className="btn-group bg-white d-flex mb-3"
+      className="btn-group bg-white d-flex"
       role="group"
       aria-label="Rank button group"
     >

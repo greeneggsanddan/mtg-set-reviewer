@@ -26,7 +26,6 @@ export default function NavBar({
         credentials: "include",
       });
       if (response.ok) {
-        console.log("Logged out");
         setUser(null);
         setCurrentCard(0);
       }

@@ -38,24 +38,24 @@ export default function CardNav({
     >
       <button
         type="button"
-        className="btn btn-dark"
+        className="btn btn-outline-dark"
         onClick={decrementCard}
       >
         <i className="bi bi-chevron-left"></i>
         <span> Prev</span>
       </button>
-        <button
-          className="btn btn-outline-dark"
-          type="button"
+      <button
+        className="btn btn-outline-dark"
+        type="button"
         onClick={handleTransform}
         disabled={!card.dfc}
-        >
-          <i className="bi bi-arrow-repeat"></i>
-          <span> Transform</span>
-        </button>
+      >
+        <i className="bi bi-arrow-repeat"></i>
+        <span> Transform</span>
+      </button>
       <button
         type="button"
-        className="btn btn-dark"
+        className="btn btn-outline-dark"
         onClick={incrementCard}
       >
         <span>Next </span>

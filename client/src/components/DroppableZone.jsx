@@ -5,14 +5,17 @@ function Droppable(props) {
     id: props.id,
   });
 
-  return <div className="col h-100" ref={setNodeRef} />
+  return <div className="col h-100" ref={setNodeRef} />;
 }
 
 export default function DroppableZone() {
   const ranks = ["S", "A", "B", "C", "D", "F", "Sideboard"];
 
   return (
-    <div className="container position-absolute top-0 h-100" style={{ pointerEvents: 'none' }}>
+    <div
+      className="container position-absolute top-0 h-100"
+      style={{ pointerEvents: "none" }}
+    >
       <div className="row h-100">
         {ranks.map((value) => (
           <Droppable id={value} key={value} />

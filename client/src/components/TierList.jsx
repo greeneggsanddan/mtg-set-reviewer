@@ -2,7 +2,13 @@ import { useState } from "react";
 import ManaCost from "./ManaCost";
 import CardModal from "./CardModal";
 
-export default function TierList({ cardData, setCardData, setHover, user, setCurrentCard }) {
+export default function TierList({
+  cardData,
+  setCardData,
+  setHover,
+  user,
+  setCurrentCard,
+}) {
   const ranks = ["S", "A", "B", "C", "D", "F", "Sideboard", "Unranked"];
   const colors = ["W", "U", "B", "R", "G", "MC", "C"];
   const bgColors = {
@@ -95,10 +101,14 @@ export default function TierList({ cardData, setCardData, setHover, user, setCur
         {colors.map((color) => (
           <div className="col" key={color}>
             <div className="card">
-              <div className={`card-header text-center fw-medium ${bgColors[color]}`}>
+              <div
+                className={`card-header text-center fw-medium ${bgColors[color]}`}
+              >
                 {colorString[color]}
               </div>
-              <div className="list-group list-group-flush">{ranks.map((rank) => displayCards(color, rank))}</div>
+              <div className="list-group list-group-flush">
+                {ranks.map((rank) => displayCards(color, rank))}
+              </div>
             </div>
           </div>
         ))}

@@ -1,7 +1,4 @@
-export default function ModalRankBar({
-  cardRank,
-  setCardRank
-}) {
+export default function ModalRankBar({ cardRank, setCardRank }) {
   const ranks = ["S", "A", "B", "C", "D", "F", "Sideboard"];
 
   function handleButtonClick(e) {

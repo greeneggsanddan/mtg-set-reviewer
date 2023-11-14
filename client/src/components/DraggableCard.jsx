@@ -5,7 +5,7 @@ export default function DraggableCard(props) {
   const { attributes, listeners, setNodeRef } = useDraggable({
     id: "card",
   });
-  
+
   // const style = transform
   //   ? {
   //       transform: CSS.Translate.toString(transform),
