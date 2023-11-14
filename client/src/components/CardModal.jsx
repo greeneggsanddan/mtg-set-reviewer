@@ -1,11 +1,20 @@
-import { useState, useEffect } from 'react';
-import Modal from 'react-bootstrap/Modal';
-import ModalRankBar from './ModalRankBar';
-import { saveData } from '../utils/utils';
+/* eslint-disable react/self-closing-comp */
+import { useState, useEffect } from "react";
+import Modal from "react-bootstrap/Modal";
+import ModalRankBar from "./ModalRankBar";
+import { saveData } from "../utils/utils";
 
-export default function CardModal({ show, setShow, cardData, setCardData, cardId, user }) {
-  const [card, setCard] = useState({ image_1: null, name: null });
+export default function CardModal({
+  show,
+  setShow,
+  cardData,
+  setCardData,
+  cardId,
+  user,
+}) {
+  const [card, setCard] = useState({ dfc: null, image_1: null, name: null });
   const [cardRank, setCardRank] = useState(null);
+  const [cardFace, setCardFace] = useState(true);
 
   useEffect(() => {
     if (cardData.length > 0 && cardId !== null) {
@@ -26,18 +35,32 @@ export default function CardModal({ show, setShow, cardData, setCardData, cardId
     });
 
     setCardData(updatedCards);
-    if (user) saveData(updatedCards, 'lci')
+    if (user) saveData(updatedCards, "lci");
     setShow(false);
   }
 
+  const handleTransform = () => setCardFace(!cardFace);
+
   return (
     <Modal show={show} onHide={handleClose} centered>
-      <Modal.Body>
-        <img src={card.image_1} alt={card.name} className="w-100 mb-3" style={{ borderRadius: '1.25rem' }} />
-        <ModalRankBar
-          cardRank={cardRank}
-          setCardRank={setCardRank}
+      <Modal.Body className="d-grid gap-3">
+        <img
+          src={cardFace ? card.image_1 : card.image_2}
+          alt={card.name}
+          className="w-100"
+          style={{ borderRadius: "1.25rem" }}
         />
+        <ModalRankBar cardRank={cardRank} setCardRank={setCardRank} />
+        {card.dfc && (
+          <button
+            className="btn btn-dark"
+            type="button"
+            onClick={handleTransform}
+          >
+            <i className="bi bi-arrow-repeat"></i>
+            <span> Transform</span>
+          </button>
+        )}
       </Modal.Body>
       <Modal.Footer>
         <button
