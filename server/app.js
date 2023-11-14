@@ -57,7 +57,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://mtg-set-reviewer.netlify.app/",
+    origin: "https://mtg-set-reviewer.netlify.app",
     credentials: true,
   }),
 );
