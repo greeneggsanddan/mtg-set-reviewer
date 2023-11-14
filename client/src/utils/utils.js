@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/prefer-default-export
 export async function saveData(data, set) {
   try {
-    await fetch(`http://localhost:3000/sets/${set}`, {
+    await fetch(`https://set-review-server.fly.dev/sets/${set}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

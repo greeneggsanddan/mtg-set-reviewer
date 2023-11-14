@@ -18,13 +18,16 @@ export default function NavBar({
 
   async function handleLogout() {
     try {
-      const response = await fetch("http://localhost:3000/auth/logout", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "https://set-review-server.fly.dev/auth/logout",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
         },
-        credentials: "include",
-      });
+      );
       if (response.ok) {
         setUser(null);
         setCurrentCard(0);
