@@ -30,7 +30,7 @@ export default function TierList({ cardData, setCardData, setHover, user, setCur
   function handleShow(id, index) {
     setShow(true);
     setCardId(id);
-    // setCurrentCard(index);
+    setCurrentCard(index);
   }
 
   function handleHover(id) {

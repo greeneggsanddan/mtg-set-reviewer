@@ -75,13 +75,4 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/", indexRouter);
 
-// Sends the username of the currently logged in user (For testing purposes)
-app.get("/api", (req, res) => {
-  if (req.user) {
-    res.json({ message: `Current user: ${req.user.username}` });
-  } else {
-    res.json({ message: "No current user" });
-  }
-});
-
 module.exports = app;

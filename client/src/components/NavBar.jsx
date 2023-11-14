@@ -35,14 +35,6 @@ export default function NavBar({
     }
   }
 
-  async function checkUser() {
-    const response = await fetch("http://localhost:3000/api", {
-      credentials: "include",
-    });
-    const data = await response.json();
-    console.log(data.message);
-  }
-
   return (
     <>
       <nav className="navbar bg-purple">
@@ -60,7 +52,7 @@ export default function NavBar({
                 Logout
               </button>
               <div
-                className="bg-white fw-semibold fs-5 text-purple rounded-circle d-flex align-items-center justify-content-center"
+                className="bg-white fw-semibold fs-5 text-purple rounded d-flex align-items-center justify-content-center"
                 style={{ height: "2.25rem", width: "2.25rem" }}
               >
                 {user[0].toUpperCase()}
