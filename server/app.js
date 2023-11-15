@@ -66,7 +66,12 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
-  session({ secret: "brushwagg", resave: false, saveUninitialized: true }),
+  session({
+    secret: "brushwagg",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true },
+  }),
 );
 app.use(passport.initialize());
 app.use(passport.session());
