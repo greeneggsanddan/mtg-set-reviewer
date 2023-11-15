@@ -71,7 +71,7 @@ app.use(
     origin:
       process.env.NODE_ENV === "production"
         ? "https://mtg-set-reviewer.netlify.app"
-        : "http://localhost:3000",
+        : "http://localhost:5173",
     credentials: true,
   }),
 );
