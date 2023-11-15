@@ -21,7 +21,7 @@ export default function NavBar({
       const response = await fetch(
         "https://mtg-set-reviewer.fly.dev/auth/logout",
         {
-          method: "GET",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
