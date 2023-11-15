@@ -24,12 +24,13 @@ main().catch((err) => console.log(err));
 
 const app = express();
 
+app.set('trust proxy', 1)
 app.use(
   session({
     secret: `${process.env.SESSION_SECRET}`,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: process.env.NODE_ENV === "production" },
+    cookie: { sameSite: 'none', secure: process.env.NODE_ENV === "production" },
   }),
 );
 app.use(passport.initialize());
