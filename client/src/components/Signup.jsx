@@ -43,8 +43,7 @@ export default function Signup({
         mode: "cors",
       });
       const data = await response.json();
-      setUser(data.username);
-
+      
       if (data.exists) {
         setUserExists(true);
       } else {
@@ -58,7 +57,8 @@ export default function Signup({
           credentials: "include",
           mode: "cors",
         });
-
+        
+        setUser(data.username);
         handleCloseSignup();
       }
     } catch (error) {

@@ -6,6 +6,7 @@ const Set = require("../models/set");
 router.post("/:set", async (req, res) => {
   try {
     const { user } = req;
+    console.log(user);
     const set = new Set({
       user: user._id,
       code: req.params.set,
