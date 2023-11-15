@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for set-review-server on 2023-11-13T21:16:38-08:00
+# fly.toml app configuration file generated for mtg-set-reviewer on 2023-11-14T20:22:50-08:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "set-review-server"
+app = "mtg-set-reviewer"
 primary_region = "sjc"
 
 [build]

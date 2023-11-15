@@ -33,7 +33,7 @@ export default function Signup({
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/auth/signup", {
+      const response = await fetch("https://mtg-set-reviewer.fly.dev/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -48,7 +48,7 @@ export default function Signup({
         setUserExists(true);
       } else {
         // Create cardData for new user
-        await fetch("http://localhost:3000/sets/lci", {
+        await fetch("https://mtg-set-reviewer.fly.dev/sets/lci", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

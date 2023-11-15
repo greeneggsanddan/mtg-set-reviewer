@@ -35,7 +35,7 @@ export default function Login({
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/auth/login", {
+      const response = await fetch("https://mtg-set-reviewer.fly.dev/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +53,7 @@ export default function Login({
           setCardData(authenticated.data);
           setCurrentCard(0);
         } else {
-          await fetch("http://localhost:3000/sets/lci", {
+          await fetch("https://mtg-set-reviewer.fly.dev/sets/lci", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
