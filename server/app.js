@@ -13,6 +13,28 @@ const mongoose = require("mongoose");
 const User = require("./models/user");
 const indexRouter = require("./routes/index");
 
+mongoose.set("strictQuery", false);
+const mongoDB = `${process.env.DATABASE_URL}`;
+
+async function main() {
+  await mongoose.connect(mongoDB);
+}
+
+main().catch((err) => console.log(err));
+
+const app = express();
+
+app.use(
+  session({
+    secret: `${process.env.SESSION_SECRET}`,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: process.env.NODE_ENV === "production" },
+  }),
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
 passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
@@ -44,20 +66,12 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-mongoose.set("strictQuery", false);
-const mongoDB =`${process.env.DATABASE_URL}`;
-
-async function main() {
-  await mongoose.connect(mongoDB);
-}
-
-main().catch((err) => console.log(err));
-
-const app = express();
-
 app.use(
   cors({
-    origin: "https://mtg-set-reviewer.netlify.app",
+    origin:
+      process.env.NODE_ENV === "production"
+        ? "https://mtg-set-reviewer.netlify.app"
+        : "http://localhost:3000",
     credentials: true,
   }),
 );
@@ -65,16 +79,6 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-app.use(
-  session({
-    secret: "brushwagg",
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true },
-  }),
-);
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/", indexRouter);
