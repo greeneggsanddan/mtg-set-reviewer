@@ -1,1 +1,1 @@
-# mtg-set-reviewer
+# MTG Set Reviewer
