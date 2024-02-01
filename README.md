@@ -6,14 +6,14 @@ Live demo: https://mtg-set-reviewer.netlify.app/
 ![Home page](/screenshots/set-reviewer-home.png)
 ![Card modal](/screenshots/set-reviewer-modal.png)
 
-# Features
+### Features
 * Rate each card with the click of a button.
 * Cards are displayed and organized based on their ratings.
 * Users can make an account to save their ratings for each card.
 * Passwords are hased for user authentication.
 * Implements REST API for user data management
 * Fully responsive for desktop, tablet, and mobile devices.
-# Tools and Technologies
+### Tools and Technologies
 * React
 * Node.js
 * Express
